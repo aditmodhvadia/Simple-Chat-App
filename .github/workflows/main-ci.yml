@@ -29,5 +29,5 @@ jobs:
         run: npm i
 
       # Builds the react application
-      - name: Run a multi-line script
-        run: npm build
+      - name: Build and test the React Application
+        run: npm run build
