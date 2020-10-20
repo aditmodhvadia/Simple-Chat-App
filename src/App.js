@@ -19,9 +19,10 @@ import AppHeader from "./components/AppHeader";
 import ChatScreen from "./screens/ChatScreen";
 import SignInScreen from "./screens/SignInScreen";
 
+const auth = firebase.auth()
 
 function App() {
-  const { user } = useAuthState(firebase.auth())
+  const [user] = useAuthState(auth)
   return (
     <Provider store={store}>
       <div className="App">
