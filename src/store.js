@@ -3,10 +3,8 @@ import firebase from "firebase";
 import 'firebase/firestore'
 import { firebaseReducer } from 'react-redux-firebase'
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
+import { firebaseConfig } from "./firebase-config";
 // TODO: Reducers
-const firebaseConfig = {
-    // TODO: Update this with your firebase config
-}
 
 // React redux firebase config
 const rrfConfig = {
