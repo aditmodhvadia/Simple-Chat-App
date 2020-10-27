@@ -16,14 +16,19 @@ export const SendMessage = () => {
         e.preventDefault()
         const { uid, photoURL } = user
 
-        await chatMessagesRef.add({
-            text: msg,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL
-        })
-
-        setMsg('')
+        try {
+            await chatMessagesRef.add({
+                text: msg,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                uid,
+                photoURL
+            })
+        } catch (error) {
+            // TODO: Show alert to the user 
+            console.error("You cannot send messages anymore, you were banned.");
+        } finally {
+            setMsg('')
+        }
     }
 
     return (
