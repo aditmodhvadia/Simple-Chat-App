@@ -20,5 +20,5 @@ Instead by using Simple Chat application everyone can quickly join the conversat
 - [x] Users can sign in and sign out of the application.
 - [ ] Users can create new chat rooms with name and image(Maybe). (Low priority)
 - [ ] User can set the time to live for the messages of a new chat room. (Low Priority)
-- [ ] Messages with profanity or explicit content are filtered.
-- [ ] Users who send messages with profanity or explicit content will be banned from the chat room. (Low Priority)
+- [x] Messages with profanity or explicit content are filtered.
+- [x] Users who send messages with profanity or explicit content will be banned from the chat room. (Low Priority)
