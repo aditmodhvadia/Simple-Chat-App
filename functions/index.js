@@ -9,12 +9,14 @@ exports.determineExplicitContent = functions.firestore.document('chatmessages/{m
     const filter = new BadWordsFilter()
 
     const { text, uid } = doc.data()
-
     if (filter.isProfane(text)) {
         const cleanText = filter.clean(text)
         await doc.ref.update({ text: `I got banned for using profanity: ${cleanText}` })
 
-        await db.collection('bannedUsers').doc(uid).set({})
+        const userEmail = (await admin.auth().getUser(uid)).email;
+        await db.collection('bannedUsers').doc(uid).set({
+            email: userEmail
+        })
     }
 })
 
