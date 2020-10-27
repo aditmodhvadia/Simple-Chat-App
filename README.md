@@ -2,6 +2,10 @@
 
 This is chat application built using React, Firebase and MaterialUI.
 
+## Live deployment
+
+https://simple-chat-app-6d88e.web.app/
+
 ### Intention
 
 The need for such an application arises whenever a group of people might wanna discuss something quickly but would need to set up a slack workspace, or a discord server.
