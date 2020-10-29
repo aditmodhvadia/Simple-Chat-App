@@ -4,6 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import { Button } from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -37,7 +39,9 @@ export const SendMessage = () => {
                 <input type="text" value={msg} name="msg" id="msg" placeholder="Enter a message" onChange={(e) => {
                     setMsg(e.target.value)
                 }} />
-                <button onClick={onSendClicked}>Send</button>
+                <Button aria-label="send msg" color="primary" size="medium" variant="contained" onClick={onSendClicked}>
+                    <SendIcon />
+                </Button>
             </form>
         </div>
     )

@@ -1,6 +1,6 @@
 export const firebaseConfig = {
     apiKey: "AIzaSyC0__fnJ-46LH1fNLQs1dW0c9sQQgCU-0Q",
-    authDomain: "simple-chat-app-6d88e.web.app",
+    authDomain: "simple-chat-app-6d88e.firebaseapp.com",
     databaseURL: "https://simple-chat-app-6d88e.firebaseio.com",
     projectId: "simple-chat-app-6d88e",
     storageBucket: "simple-chat-app-6d88e.appspot.com",

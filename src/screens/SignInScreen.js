@@ -1,6 +1,7 @@
 import React from 'react'
 import GoogleButton from 'react-google-button'
 import firebase from 'firebase/app'
+import { Container } from '@material-ui/core'
 
 
 function SignInScreen() {
@@ -9,9 +10,9 @@ function SignInScreen() {
         firebase.auth().signInWithPopup(googleAuthProvider)
     }
     return (
-        <div>
+        <Container maxWidth="sm">
             <GoogleButton onClick={handleGoogleSignIn} />
-        </div>
+        </Container>
     )
 }
 
