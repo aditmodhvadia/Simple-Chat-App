@@ -5,6 +5,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { SendMessage } from '../components/SendMessage';
 import TimeAgo from 'react-timeago';
 import dateFormat from 'dateformat';
+import { createStyles, makeStyles } from '@material-ui/core';
 
 function ChatScreen() {
     const chatMessagesRef = firebase.firestore().collection('chatmessages');
@@ -23,6 +24,12 @@ function ChatScreen() {
     );
 }
 
+const useStyles = makeStyles(() => createStyles({
+    circleAvatar: {
+        borderRadius: '50%'
+    },
+}));
+
 function ChatMessage(props) {
     const { text, photoURL, createdAt } = props.message;
     const msgDate = createdAt
@@ -30,10 +37,14 @@ function ChatMessage(props) {
         : null;
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
 
+
+
+    const classes = useStyles();
+
     return (
         <div>
             <p> {text}</p>
-            <img src={photoURL} alt='Sender' height='30' width='30' />
+            <img className={classes.circleAvatar} src={photoURL} alt='Sender' height='30' width='30' />
             <br />
             {timeAgo}
             <div>{dateFormat(msgDate, 'h:MM TT')}</div>
