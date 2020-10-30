@@ -1,6 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./store";
+import './App.css'
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -18,6 +19,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import AppHeader from "./components/AppHeader";
 import ChatScreen from "./screens/ChatScreen";
 import SignInScreen from "./screens/SignInScreen";
+import { ThemeProvider } from "@material-ui/core";
+import { theme } from "./theme";
 
 const auth = firebase.auth()
 
@@ -25,12 +28,14 @@ function App() {
   const [user] = useAuthState(auth)
   return (
     <Provider store={store}>
-      <div className="App">
-        <AppHeader />
-        <section>
-          {user ? <ChatScreen /> : <SignInScreen />}
-        </section>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <AppHeader />
+          <section>
+            {user ? <ChatScreen /> : <SignInScreen />}
+          </section>
+        </div>
+      </ThemeProvider>
     </Provider>
   );
 }
