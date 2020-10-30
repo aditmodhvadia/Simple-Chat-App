@@ -17,7 +17,7 @@ function ChatScreen() {
 
     const scrollTo = useRef()
 
-    // automaticall scroll to the bottom of the msgs when messages are updated
+    // automatically scroll to the bottom of the msgs when messages are updated
     useEffect(() => {
         scrollTo.current.scrollIntoView({ behavior: "smooth" })
     }, [messages])
@@ -40,10 +40,7 @@ const useStyles = makeStyles((theme) => createStyles({
         width: '30px'
     },
     msgBody: {
-        background: theme.palette.primary.main,
-        borderRadius: "25px 25px 0px 25px",
-        color: "white",
-        fontSize: 16
+
     },
     msgTime: {
         fontSize: 14
@@ -55,7 +52,7 @@ function ChatMessage(props) {
     const { uid } = user
     const { text, photoURL, createdAt } = props.message;
 
-    const messageSender = uid === props.message.uid ? "sender" : "received"
+    const messageSender = uid === props.message.uid ? "sender" : "receiver"
 
     const msgDate = createdAt
         ? new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
@@ -67,20 +64,18 @@ function ChatMessage(props) {
     const classes = useStyles();
 
     return (
-        <Grid className={`${messageSender}`} container spacing={2}>
-            <Grid item xs={6} className={classes.msgBody}>
-                <Container>
-                    <p>{text}</p>
-                </Container>
-            </Grid>
-            <Grid item xs={3} className={classes.msgTime}>
-                {timeAgo}
-                <div>{dateFormat(msgDate, 'h:MM TT')}</div>
-            </Grid>
-            <Grid item xs={4} >
+        <div className={`msg ${messageSender}`}>
+            <div className="msg-container">
+                <div className="msg-body"><p>{text}</p></div>
+                <div className={`msg-time-details`}>
+                    {timeAgo}
+                    {dateFormat(msgDate, 'h:MM TT')}
+                </div>
+            </div>
+            <div className="msg-avatar">
                 <img className={classes.circleAvatar} src={photoURL} alt='Sender' />
-            </Grid>
-        </Grid>
+            </div>
+        </div >
     );
 }
 
