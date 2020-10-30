@@ -1,0 +1,60 @@
+.send-msg-container {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  max-height: 10vh;
+  display: flex;
+  justify-content: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+form {
+  margin: 8px;
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+header {
+  height: 10vh;
+  width: 100%;
+  background-color: #607d8b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.branding {
+  color: white;
+  letter-spacing: 0.55rem;
+}
+
+send-btn {
+  width: 32px;
+  height: 32px;
+}
+
+.sign-out {
+  height: 32px;
+  margin-right: 8px;
+}
+
+input {
+  border: none;
+}
+
+section {
+  overflow-y: scroll;
+  height: 80vh;
+}
+body {
+  max-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}

@@ -4,15 +4,34 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { Button } from '@material-ui/core'
+import { Box, Button, createStyles, makeStyles, TextField } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 
 
+const useStyles = makeStyles((theme) => createStyles({
+    sendMsg: {
+        background: theme.palette.secondary.main,
+        padding: theme.spacing(2),
+        // width: "100%",
+        // position: "position",
+        // bottom: "0",
+        borderRadius: "8px",
+        // position: "fixed",
+    },
+    msgInputBox: {
+        width: "90%",
+    },
+    msgInput: {
+        background: theme.palette.secondary.main,
+        color: "#fff",
+    }
+}));
 
 export const SendMessage = () => {
     const [msg, setMsg] = useState("")
     const [user] = useAuthState(firebase.auth())
     const chatMessagesRef = firebase.firestore().collection('chatmessages')
+
 
     const onSendClicked = async (e) => {
         e.preventDefault()
@@ -32,16 +51,26 @@ export const SendMessage = () => {
             setMsg('')
         }
     }
+    const classes = useStyles();
 
     return (
-        <div>
-            <form>
-                <input type="text" value={msg} name="msg" id="msg" placeholder="Enter a message" onChange={(e) => {
-                    setMsg(e.target.value)
-                }} />
-                <Button aria-label="send msg" color="primary" size="medium" variant="contained" onClick={onSendClicked}>
-                    <SendIcon />
-                </Button>
+        <div className="send-msg-container">
+            <form className={classes.sendMsg} action="POST" onSubmit={onSendClicked}>
+                <TextField className={classes.msgInput} type="text"
+                    value={msg} name="msg" id="msg" placeholder="Type a message here"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                        className: classes.msgInput
+                    }}
+                    onChange={(e) => {
+                        setMsg(e.target.value)
+                    }} />
+                <Box ml={2}>
+                    <Button className="send-btn" aria-label="send msg" color="primary" size="medium" variant="contained" onClick={onSendClicked}>
+                        <SendIcon />
+                    </Button>
+                </Box>
             </form>
         </div>
     )
