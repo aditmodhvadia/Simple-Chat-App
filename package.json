@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "dateformat": "^3.0.3",
     "firebase": "^8.0.0",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.2.0",
     "react-google-button": "^0.7.1",
