@@ -5,7 +5,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { SendMessage } from '../components/SendMessage';
 import TimeAgo from 'react-timeago';
 import dateFormat from 'dateformat';
-import { Container, createStyles, Grid, makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 
