@@ -69,12 +69,12 @@ body {
 }
 
 .msg-body {
-  padding: 8px;
+  padding: 4px 8px;
   max-width: 50vw;
   background: #e91e63;
-  border-radius: 25px 25px 0px 25px;
+  border-radius: 35px;
   color: white;
-  font-size: 16;
+  font-size: 18px;
 }
 
 .msg-container {
@@ -88,6 +88,7 @@ body {
   flex-direction: column;
   align-self: flex-end;
   align-items: flex-end;
+  font-size: 14px;
 }
 
 .receiver {
@@ -95,7 +96,14 @@ body {
   flex-direction: row-reverse;
 }
 
-.msg-avatar {
+.msg-avatar-holder {
   align-self: flex-end;
   margin: 0 8px 8px 8px;
+  height: 30px;
+  width: 30px;
+}
+.msg-avatar {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
 }
