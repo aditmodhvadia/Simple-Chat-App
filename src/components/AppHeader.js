@@ -19,7 +19,7 @@ function AppHeader() {
 const SignOutButton = () => {
     return (
         <Box mr={1}>
-            <Button variant="contained" size="large" color="secondary" className="sign-out" startIcon={<ExitToAppIcon style={{
+            <Button variant="contained" disableElevation size="large" color="secondary" className="sign-out" startIcon={<ExitToAppIcon style={{
                 transform: "rotateY(180deg)"
             }} />} onClick={() => {
                 firebase.auth().signOut()
