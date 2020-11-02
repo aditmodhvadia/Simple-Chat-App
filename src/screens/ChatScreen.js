@@ -45,7 +45,7 @@ function ChatScreen() {
 function ChatMessage(props) {
     const [user] = useAuthState(firebase.auth())
     const { uid } = user
-    const { text, photoURL, createdAt } = props.message;
+    const { text, photoURL, createdAt, displayName } = props.message;
 
     const messageSender = uid === props.message.uid ? "sender" : "receiver"
 
@@ -65,6 +65,7 @@ function ChatMessage(props) {
             <div className="msg-container">
                 <div className="msg-body"><p>{text}</p></div>
                 <div className={`msg-time-details`}>
+                    {showMsgDetails && displayName}
                     {showMsgDetails && timeAgo}
                     {showMsgDetails && dateFormat(msgDate, 'h:MM TT')}
                 </div>

@@ -35,14 +35,16 @@ export const SendMessage = () => {
 
     const onSendClicked = async (e) => {
         e.preventDefault()
-        const { uid, photoURL } = user
+        const { uid, photoURL, displayName } = user
 
         try {
+            console.log(displayName);
             await chatMessagesRef.add({
                 text: msg,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
-                photoURL
+                photoURL,
+                displayName
             })
         } catch (error) {
             // TODO: Show alert to the user 

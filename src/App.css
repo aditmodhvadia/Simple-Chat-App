@@ -62,6 +62,7 @@ body {
 
 .msg {
   display: flex;
+  margin: 2px;
 }
 
 .sender {
@@ -88,7 +89,8 @@ body {
   flex-direction: column;
   align-self: flex-end;
   align-items: flex-end;
-  font-size: 14px;
+  font-size: 12px;
+  letter-spacing: 0.05rem;
 }
 
 .receiver {
@@ -98,7 +100,7 @@ body {
 
 .msg-avatar-holder {
   align-self: flex-end;
-  margin: 0 8px 8px 8px;
+  margin: 0 8px 28px 8px;
   height: 30px;
   width: 30px;
 }
