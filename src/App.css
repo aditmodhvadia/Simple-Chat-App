@@ -1,3 +1,8 @@
+.App {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 .send-msg-container {
   width: 100%;
   position: fixed;
@@ -70,12 +75,14 @@ body {
 }
 
 .msg-body {
-  padding: 4px 8px;
+  padding: 4px 16px;
+  min-width: 2vw;
   max-width: 50vw;
   background: #e91e63;
   border-radius: 35px;
   color: white;
   font-size: 18px;
+  /* text-align: center; */
 }
 
 .msg-container {

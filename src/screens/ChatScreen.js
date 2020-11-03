@@ -47,6 +47,8 @@ function ChatMessage(props) {
     const { uid } = user
     const { text, photoURL, createdAt, displayName } = props.message;
 
+    console.log(user);
+
     const messageSender = uid === props.message.uid ? "sender" : "receiver"
 
     const { showMsgDetails } = props
@@ -65,9 +67,16 @@ function ChatMessage(props) {
             <div className="msg-container">
                 <div className="msg-body"><p>{text}</p></div>
                 <div className={`msg-time-details`}>
-                    {showMsgDetails && displayName}
-                    {showMsgDetails && timeAgo}
-                    {showMsgDetails && dateFormat(msgDate, 'h:MM TT')}
+                    {showMsgDetails ?
+                        <>
+                            {displayName}
+                            {timeAgo}
+                            {dateFormat(msgDate, 'h:MM TT')}
+                        </>
+                        :
+                        null
+                    }
+
                 </div>
             </div>
             <div className="msg-avatar-holder">
