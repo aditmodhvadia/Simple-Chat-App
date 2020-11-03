@@ -5,7 +5,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { SendMessage } from '../components/SendMessage';
 import TimeAgo from 'react-timeago';
 import dateFormat from 'dateformat';
-import { createStyles, makeStyles } from '@material-ui/core';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 
@@ -25,7 +24,17 @@ function ChatScreen() {
     return (
         <main>
             <section>
-                {messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+                {messages && messages.map((msg, i) => {
+                    let showMsgDetails = true
+                    if (i === messages.length - 1) {
+                        showMsgDetails = true
+                    }
+                    if (i + 1 < messages.length && messages[i + 1].uid === msg.uid) {
+                        showMsgDetails = false
+                    }
+                    return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
+                }
+                )}
                 <div ref={scrollTo}></div>
             </section>
             <SendMessage />
@@ -33,26 +42,15 @@ function ChatScreen() {
     );
 }
 
-const useStyles = makeStyles((theme) => createStyles({
-    circleAvatar: {
-        borderRadius: '50%',
-        height: '30px',
-        width: '30px'
-    },
-    msgBody: {
-
-    },
-    msgTime: {
-        fontSize: 14
-    },
-}));
-
 function ChatMessage(props) {
     const [user] = useAuthState(firebase.auth())
     const { uid } = user
-    const { text, photoURL, createdAt } = props.message;
+    const { text, photoURL, createdAt, displayName } = props.message;
 
     const messageSender = uid === props.message.uid ? "sender" : "receiver"
+
+    const { showMsgDetails } = props
+
 
     const msgDate = createdAt
         ? new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
@@ -61,19 +59,19 @@ function ChatMessage(props) {
 
 
 
-    const classes = useStyles();
 
     return (
         <div className={`msg ${messageSender}`}>
             <div className="msg-container">
                 <div className="msg-body"><p>{text}</p></div>
                 <div className={`msg-time-details`}>
-                    {timeAgo}
-                    {dateFormat(msgDate, 'h:MM TT')}
+                    {showMsgDetails && displayName}
+                    {showMsgDetails && timeAgo}
+                    {showMsgDetails && dateFormat(msgDate, 'h:MM TT')}
                 </div>
             </div>
-            <div className="msg-avatar">
-                <img className={classes.circleAvatar} src={photoURL} alt='Sender' />
+            <div className="msg-avatar-holder">
+                {showMsgDetails && <img className="msg-avatar" src={photoURL} alt='Sender' />}
             </div>
         </div >
     );
