@@ -117,7 +117,28 @@ body {
   width: 30px;
 }
 
+.chat-room-item {
+  padding: 8px;
+  border-radius: 4px;
+}
+
 .chat-room-selected {
   background-color: #e91e63;
   color: white;
+}
+
+.chat-room-name {
+  font-size: 20px;
+}
+p.msg-text {
+  font-size: 18px;
+}
+p.msg-time {
+  font-size: 12px;
+  letter-spacing: 0.05rem;
+}
+
+.chat-room-last-msg {
+  display: flex;
+  align-items: center;
 }

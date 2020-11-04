@@ -1,7 +1,8 @@
 import React from 'react'
 import firebase from 'firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
+import TimeAgo from 'react-timeago';
 
 export const ChatRoomList = props => {
     const chatRoomsRef = firebase.firestore().collection("chatRooms");
@@ -33,15 +34,24 @@ export const ChatRoomList = props => {
 }
 
 const ChatRoomItem = props => {
-    const { name, createdAt, lastMsg, id } = props.chatRoom;
+    const { name, lastMsg, id } = props.chatRoom;
     const chatRoomType = props.isChatRoomSelected ? "chat-room-selected" : "chat-room-not-selected"
+
+    const msgDate = lastMsg.createdAt
+        ? new Date(lastMsg.createdAt.seconds * 1000 + lastMsg.createdAt.nanoseconds / 1000000)
+        : null;
+    const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
+
     return (
-        <div className={`chat-room-item ${chatRoomType}`}>
+        <div className={`chat-room-item ${chatRoomType}`} onClick={() => props.onChatRoomClick(id)}>
             <div className="chat-room-name">
-                <p onClick={() => props.onChatRoomClick(id)}># {name}</p>
+                <Typography variant="h6"># {name}</Typography>
             </div>
             <div className="chat-room-last-msg">
-                <p>{lastMsg}</p>
+                <p className="msg-text">{lastMsg && lastMsg.text}</p>
+                <Box ml={1}>
+                    <p className="msg-time">{timeAgo}</p>
+                </Box>
             </div>
         </div>
     )

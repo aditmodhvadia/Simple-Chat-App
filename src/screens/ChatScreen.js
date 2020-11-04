@@ -22,7 +22,7 @@ function ChatScreen() {
                 <Hidden only="xs">
                     <Grid item sm={2}>
                         {/* TODO: Create Channel Button */}
-                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} />
+                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} chatRoomId={selectedChatRoomId} />
                     </Grid>
                 </Hidden>
                 <Grid item xs={12} sm={10}>
