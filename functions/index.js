@@ -5,7 +5,7 @@ const BadWordsFilter = require('bad-words');
 admin.initializeApp()
 const db = admin.firestore()
 
-exports.determineExplicitContent = functions.firestore.document('chatmessages/{msgId}').onCreate(async (doc, context) => {
+exports.determineExplicitContent = functions.firestore.document('chatRooms/{roomId}/messages/{msgId}').onCreate(async (doc, context) => {
     const filter = new BadWordsFilter()
 
     const { text, uid } = doc.data()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'firebase/firestore';
 import { ChatRoom } from '../components/ChatRoom';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import { ChatRoomList } from '../components/ChatRoomList';
 
 
@@ -19,11 +19,13 @@ function ChatScreen() {
     return (
         <main>
             <Grid container>
-                <Grid item md={4}>
-                    {/* TODO: Create Channel Button */}
-                    <ChatRoomList onChatRoomClicked={onChatRoomClicked} />
-                </Grid>
-                <Grid item xs={12} md={8}>
+                <Hidden only="xs">
+                    <Grid item sm={2}>
+                        {/* TODO: Create Channel Button */}
+                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} />
+                    </Grid>
+                </Hidden>
+                <Grid item xs={12} sm={10}>
                     {selectedChatRoomId !== "" ?
                         <ChatRoom chatRoomId={selectedChatRoomId} />
                         :

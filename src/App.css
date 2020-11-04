@@ -116,3 +116,8 @@ body {
   height: 30px;
   width: 30px;
 }
+
+.chat-room-selected {
+  background-color: #e91e63;
+  color: white;
+}
