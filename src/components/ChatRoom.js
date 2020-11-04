@@ -10,7 +10,6 @@ import TimeAgo from 'react-timeago';
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
-    console.log(chatRoomId);
 
     const chatMessagesRef = firebase.firestore().collection("chatRooms").doc(chatRoomId).collection("messages");
 
@@ -18,14 +17,13 @@ export const ChatRoom = props => {
 
     const [messages] = useCollectionData(query, { idField: 'id' });
 
-    console.log(messages);
-
     const scrollTo = useRef()
 
     // automatically scroll to the bottom of the msgs when messages are updated
     useEffect(() => {
         scrollTo.current.scrollIntoView({ behavior: "smooth" })
     }, [messages])
+
 
     return (
         <section>
@@ -51,8 +49,6 @@ function ChatMessage(props) {
     const [user] = useAuthState(firebase.auth())
     const { uid } = user
     const { text, photoURL, createdAt, displayName } = props.message;
-
-    console.log(user);
 
     const messageSender = uid === props.message.uid ? "sender" : "receiver"
 

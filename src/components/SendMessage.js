@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => createStyles({
 
 export const SendMessage = props => {
     const { chatRoomId } = props
-    console.log(`Room id is ${chatRoomId}`);
     const [msg, setMsg] = useState("")
     const [user] = useAuthState(firebase.auth())
     const chatMessagesRef = chatRoomId ? firebase.firestore().collection('chatRooms').doc(chatRoomId).collection("messages") : null
