@@ -27,10 +27,12 @@ const useStyles = makeStyles((theme) => createStyles({
     }
 }));
 
-export const SendMessage = () => {
+export const SendMessage = props => {
+    const { chatRoomId } = props
+    console.log(`Room id is ${chatRoomId}`);
     const [msg, setMsg] = useState("")
     const [user] = useAuthState(firebase.auth())
-    const chatMessagesRef = firebase.firestore().collection('chatmessages')
+    const chatMessagesRef = chatRoomId ? firebase.firestore().collection('chatRooms').doc(chatRoomId).collection("messages") : null
 
 
     const onSendClicked = async (e) => {
@@ -48,6 +50,7 @@ export const SendMessage = () => {
             })
         } catch (error) {
             // TODO: Show alert to the user 
+            console.error(error);
             console.error("You cannot send messages anymore, you were banned.");
         } finally {
             setMsg('')
