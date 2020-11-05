@@ -1,18 +1,14 @@
 import React from 'react'
-import firebase from 'firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Typography } from '@material-ui/core';
 import TimeAgo from 'react-timeago';
+import { getChatRoomListQuery } from '../firebase-manager';
 
 export const ChatRoomList = props => {
-    const chatRoomsRef = firebase.firestore().collection("chatRooms");
-
-    const query = chatRoomsRef.orderBy('createdAt');
-
+    const query = getChatRoomListQuery()
     const [chatRooms] = useCollectionData(query, { idField: 'id' });
 
     const { chatRoomId } = props
-    console.log(props);
 
     return (
         <div className="chat-room-list">

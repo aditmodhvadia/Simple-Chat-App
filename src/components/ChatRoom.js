@@ -5,15 +5,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import dateFormat from 'dateformat';
 import { SendMessage } from './SendMessage';
 import TimeAgo from 'react-timeago';
+import { getChatRoomMessagesQuery } from '../firebase-manager';
 
 
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
 
-    const chatMessagesRef = firebase.firestore().collection("chatRooms").doc(chatRoomId).collection("messages");
-
-    const query = chatMessagesRef.orderBy('createdAt').limit(50);
+    const query = getChatRoomMessagesQuery(chatRoomId)
 
     const [messages] = useCollectionData(query, { idField: 'id' });
 
