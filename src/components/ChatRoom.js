@@ -26,7 +26,7 @@ export const ChatRoom = props => {
 
 
     return (
-        <section>
+        <section className="scrollable vh-80">
             {messages && messages.map((msg, i) => {
                 let showMsgDetails = true
                 if (i === messages.length - 1) {

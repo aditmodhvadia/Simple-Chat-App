@@ -15,7 +15,7 @@ export const ChatRoomList = props => {
     console.log(props);
 
     return (
-        <>
+        <div className="chat-room-list">
             <Box ml={1}>
                 <Typography variant="h5" component="p" >Channels</Typography>
                 <section>
@@ -28,7 +28,7 @@ export const ChatRoomList = props => {
                     )}
                 </section>
             </Box>
-        </>
+        </div>
 
     )
 }
@@ -37,7 +37,7 @@ const ChatRoomItem = props => {
     const { name, lastMsg, id } = props.chatRoom;
     const chatRoomType = props.isChatRoomSelected ? "chat-room-selected" : "chat-room-not-selected"
 
-    const msgDate = lastMsg.createdAt
+    const msgDate = lastMsg && lastMsg.createdAt
         ? new Date(lastMsg.createdAt.seconds * 1000 + lastMsg.createdAt.nanoseconds / 1000000)
         : null;
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;

@@ -55,6 +55,14 @@ input {
 
 section {
   overflow-y: scroll;
+  /* height: 80vh; */
+}
+
+.scrollable {
+  scroll-padding-top: 15vh;
+}
+
+.vh-80 {
   height: 80vh;
 }
 
@@ -141,4 +149,8 @@ p.msg-time {
 .chat-room-last-msg {
   display: flex;
   align-items: center;
+}
+
+.chat-room-list {
+  height: 90vh;
 }
