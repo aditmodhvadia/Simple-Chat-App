@@ -36,12 +36,16 @@ export const SendMessage = props => {
 
     const onSendClicked = async (e) => {
         e.preventDefault()
+
+        if (msg === undefined || msg.trim() === "") {
+            return;
+        }
         const { uid, photoURL, displayName } = user
 
         try {
             console.log(displayName);
             await chatMessagesRef.add({
-                text: msg,
+                text: msg.trim(),
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
                 photoURL,
