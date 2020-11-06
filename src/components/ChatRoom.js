@@ -11,11 +11,9 @@ import { getChatRoomMessagesQuery } from '../firebase-manager';
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
-    console.log(chatRoomId);
     const query = getChatRoomMessagesQuery(chatRoomId)
 
     const [messages] = useCollectionData(query, { idField: 'id' });
-    console.log(messages);
 
     const scrollTo = useRef()
 
