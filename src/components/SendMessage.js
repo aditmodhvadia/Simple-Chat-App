@@ -43,7 +43,6 @@ export const SendMessage = props => {
         const { uid, photoURL, displayName } = user
 
         try {
-            console.log(displayName);
             await chatMessagesRef.add({
                 text: msg.trim(),
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -51,6 +50,7 @@ export const SendMessage = props => {
                 photoURL,
                 displayName
             })
+            console.log("Msg sent");
         } catch (error) {
             // TODO: Show alert to the user 
             console.error(error);

@@ -16,8 +16,6 @@ export const ChatRoomList = props => {
                 <Typography variant="h5" component="p" >Channels</Typography>
                 <section>
                     {chatRooms && chatRooms.map((chatRoom) => {
-                        console.log(chatRoomId);
-                        console.log(chatRoom.id);
                         const isChatRoomSelected = chatRoomId === chatRoom.id
                         return <ChatRoomItem key={chatRoom.id} isChatRoomSelected={isChatRoomSelected} chatRoom={chatRoom} onChatRoomClick={props.onChatRoomClicked} />
                     }

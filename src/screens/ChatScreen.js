@@ -6,12 +6,16 @@ import { ChatRoomList } from '../components/ChatRoomList';
 
 
 function ChatScreen() {
-    const [selectedChatRoomId, setSelectedChatRoomId] = useState("")
+    let storedChatRoomId = localStorage.getItem("lastChatRoomId")
+    if (!storedChatRoomId) {
+        storedChatRoomId = ""
+    }
+    const [selectedChatRoomId, setSelectedChatRoomId] = useState(storedChatRoomId)
 
     const onChatRoomClicked = clickedChatRoomId => {
-        console.log(clickedChatRoomId);
         if (clickedChatRoomId !== selectedChatRoomId) {
-            setSelectedChatRoomId(clickedChatRoomId)
+            setSelectedChatRoomId(clickedChatRoomId) // update state
+            localStorage.setItem("lastChatRoomId", clickedChatRoomId)
         }
     }
 

@@ -17,6 +17,6 @@ export const getChatRoomListQuery = () => {
 export const getChatRoomMessagesQuery = chatRoomId => {
     const chatMessagesRef = firebase.firestore().collection("chatRooms").doc(chatRoomId).collection("messages");
 
-    const query = chatMessagesRef.orderBy('createdAt').limit(50);
+    const query = chatMessagesRef.orderBy('createdAt', "desc").limit(50);
     return query
 }

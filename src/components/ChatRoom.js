@@ -11,10 +11,11 @@ import { getChatRoomMessagesQuery } from '../firebase-manager';
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
-
+    console.log(chatRoomId);
     const query = getChatRoomMessagesQuery(chatRoomId)
 
     const [messages] = useCollectionData(query, { idField: 'id' });
+    console.log(messages);
 
     const scrollTo = useRef()
 
@@ -26,7 +27,7 @@ export const ChatRoom = props => {
 
     return (
         <section className="scrollable vh-80">
-            {messages && messages.map((msg, i) => {
+            {messages && messages.reverse().map((msg, i) => {
                 let showMsgDetails = true
                 if (i === messages.length - 1) {
                     showMsgDetails = true
