@@ -6,6 +6,22 @@ This is chat application built using React, Firebase and MaterialUI.
 
 https://simple-chat-app-6d88e.web.app/
 
+## Running Locally with docker
+
+1. Build a custom image from the DockerFile
+
+```shell
+docker build --tag adit-modhvadia-project .
+```
+
+1. Run the custom built image file
+
+```shell
+docker run -p 3000:3000 adit-modhvadia-project
+```
+
+1. Open localhost:3000 in your browser
+
 ### Intention
 
 The need for such an application arises whenever a group of people might wanna discuss something quickly but would need to set up a slack workspace, or a discord server.
