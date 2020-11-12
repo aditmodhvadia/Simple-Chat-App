@@ -1,6 +1,8 @@
 .App {
   min-height: 100vh;
   min-width: 100vw;
+  background-color: #607d8b;
+  color: white;
 }
 
 .send-msg-container {
@@ -28,7 +30,7 @@ form {
 header {
   height: 10vh;
   width: 100%;
-  background-color: #607d8b;
+  background-color: #34515e;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -152,5 +154,5 @@ p.msg-time {
 }
 
 .chat-room-list {
-  height: 90vh;
+  height: 50vh;
 }

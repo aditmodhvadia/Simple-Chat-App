@@ -19,7 +19,7 @@ export const ChatRoom = props => {
 
     // automatically scroll to the bottom of the msgs when messages are updated
     useEffect(() => {
-        scrollTo.current.scrollIntoView({ behavior: "smooth" })
+        scrollTo.current.scrollIntoView()
     }, [messages])
 
 

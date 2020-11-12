@@ -10,7 +10,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 const useStyles = makeStyles((theme) => createStyles({
     sendMsg: {
-        background: theme.palette.secondary.main,
+        // background: theme.palette.secondary.main,
         padding: theme.spacing(2),
         // width: "100%",
         // position: "position",
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => createStyles({
         width: "90%",
     },
     msgInput: {
-        background: theme.palette.secondary.main,
+        background: "#34515e",
         color: "#fff",
     }
 }));
@@ -64,9 +64,10 @@ export const SendMessage = props => {
     return (
         <div className="send-msg-container">
             <form className={classes.sendMsg} action="POST" onSubmit={onSendClicked}>
-                <TextField className={classes.msgInput} type="text"
+                <TextField className={`send-msg-input ${classes.msgInput}`} type="text"
                     value={msg} name="msg" id="msg" placeholder="Type a message here"
                     variant="outlined"
+                    autoComplete='off'
                     fullWidth
                     InputProps={{
                         className: classes.msgInput

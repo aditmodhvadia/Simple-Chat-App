@@ -33,7 +33,7 @@ function ChatScreen() {
                     {selectedChatRoomId !== "" ?
                         <ChatRoom chatRoomId={selectedChatRoomId} />
                         :
-                        null}
+                        <div className="chat-room-name">Enter a chat room to start sending messages.</div>}
                 </Grid>
             </Grid>
         </main>
