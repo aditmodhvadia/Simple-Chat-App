@@ -10,7 +10,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 const useStyles = makeStyles((theme) => createStyles({
     sendMsg: {
-        background: theme.palette.secondary.main,
+        // background: theme.palette.secondary.main,
         padding: theme.spacing(2),
         // width: "100%",
         // position: "position",
@@ -22,32 +22,38 @@ const useStyles = makeStyles((theme) => createStyles({
         width: "90%",
     },
     msgInput: {
-        background: theme.palette.secondary.main,
+        background: "#34515e",
         color: "#fff",
     }
 }));
 
-export const SendMessage = () => {
+export const SendMessage = props => {
+    const { chatRoomId } = props
     const [msg, setMsg] = useState("")
     const [user] = useAuthState(firebase.auth())
-    const chatMessagesRef = firebase.firestore().collection('chatmessages')
+    const chatMessagesRef = chatRoomId ? firebase.firestore().collection('chatRooms').doc(chatRoomId).collection("messages") : null
 
 
     const onSendClicked = async (e) => {
         e.preventDefault()
+
+        if (msg === undefined || msg.trim() === "") {
+            return;
+        }
         const { uid, photoURL, displayName } = user
 
         try {
-            console.log(displayName);
             await chatMessagesRef.add({
-                text: msg,
+                text: msg.trim(),
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
                 photoURL,
                 displayName
             })
+            console.log("Msg sent");
         } catch (error) {
             // TODO: Show alert to the user 
+            console.error(error);
             console.error("You cannot send messages anymore, you were banned.");
         } finally {
             setMsg('')
@@ -58,9 +64,10 @@ export const SendMessage = () => {
     return (
         <div className="send-msg-container">
             <form className={classes.sendMsg} action="POST" onSubmit={onSendClicked}>
-                <TextField className={classes.msgInput} type="text"
+                <TextField className={`send-msg-input ${classes.msgInput}`} type="text"
                     value={msg} name="msg" id="msg" placeholder="Type a message here"
                     variant="outlined"
+                    autoComplete='off'
                     fullWidth
                     InputProps={{
                         className: classes.msgInput

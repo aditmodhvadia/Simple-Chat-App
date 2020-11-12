@@ -1,6 +1,8 @@
 .App {
   min-height: 100vh;
   min-width: 100vw;
+  background-color: #607d8b;
+  color: white;
 }
 
 .send-msg-container {
@@ -28,7 +30,7 @@ form {
 header {
   height: 10vh;
   width: 100%;
-  background-color: #607d8b;
+  background-color: #34515e;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,6 +57,14 @@ input {
 
 section {
   overflow-y: scroll;
+  /* height: 80vh; */
+}
+
+.scrollable {
+  scroll-padding-top: 15vh;
+}
+
+.vh-80 {
   height: 80vh;
 }
 
@@ -115,4 +125,34 @@ body {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.chat-room-item {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.chat-room-selected {
+  background-color: #e91e63;
+  color: white;
+}
+
+.chat-room-name {
+  font-size: 20px;
+}
+p.msg-text {
+  font-size: 18px;
+}
+p.msg-time {
+  font-size: 12px;
+  letter-spacing: 0.05rem;
+}
+
+.chat-room-last-msg {
+  display: flex;
+  align-items: center;
+}
+
+.chat-room-list {
+  height: 50vh;
 }
