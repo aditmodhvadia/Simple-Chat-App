@@ -6,8 +6,7 @@ import dateFormat from 'dateformat';
 import { SendMessage } from './SendMessage';
 import TimeAgo from 'react-timeago';
 import { getChatRoomMessagesQuery } from '../firebase-manager';
-
-
+import { shouldShowMsgDetails } from '../helpers/ChatRoomHelper'
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
@@ -26,13 +25,8 @@ export const ChatRoom = props => {
     return (
         <section className="scrollable vh-80">
             {messages && messages.reverse().map((msg, i) => {
-                let showMsgDetails = true
-                if (i === messages.length - 1) {
-                    showMsgDetails = true
-                }
-                if (i + 1 < messages.length && messages[i + 1].uid === msg.uid) {
-                    showMsgDetails = false
-                }
+                let showMsgDetails = shouldShowMsgDetails(messages, i)
+
                 return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
             }
             )}
