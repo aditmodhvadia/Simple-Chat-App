@@ -33,4 +33,4 @@ jobs:
         run: npm run build
       # Runs unit tests with mocha
       - name: Run unit tests
-        run: npm test
+        run: npm run unit-test
