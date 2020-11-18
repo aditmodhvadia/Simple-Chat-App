@@ -6,9 +6,9 @@ name: CI
 # events but only for the main branch
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,7 +21,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
 
@@ -29,5 +29,8 @@ jobs:
         run: npm i
 
       # Builds the react application
-      - name: Build and test the React Application
+      - name: Build the React Application
         run: npm run build
+      # Runs unit tests with mocha
+      - name: Run unit tests
+        run: npm test
