@@ -11,4 +11,14 @@ const shouldShowMsgDetails = (msgs, msgIndex) => {
     return true
 }
 
-module.exports.shouldShowMsgDetails = shouldShowMsgDetails
+const isSenderUser = (userId, msgSenderId) => { return userId === msgSenderId }
+
+const getClassNameForMsgSender = (isSenderUser) => {
+    return isSenderUser === true ? "sender" : "receiver"
+}
+
+module.exports = {
+    shouldShowMsgDetails,
+    isSenderUser,
+    getClassNameForMsgSender
+}
