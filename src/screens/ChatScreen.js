@@ -6,10 +6,8 @@ import { ChatRoomList } from '../components/ChatRoomList';
 
 
 function ChatScreen() {
-    let storedChatRoomId = localStorage.getItem("lastChatRoomId")
-    if (!storedChatRoomId) {
-        storedChatRoomId = ""
-    }
+    let storedChatRoomId = localStorage.getItem("lastChatRoomId") ? localStorage.getItem("lastChatRoomId") : ""
+
     const [selectedChatRoomId, setSelectedChatRoomId] = useState(storedChatRoomId)
 
     const onChatRoomClicked = clickedChatRoomId => {
