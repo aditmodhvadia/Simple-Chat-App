@@ -10,12 +10,10 @@ describe('Message Detail', () => {
     })
 
     it('show message details if single msg', () => {
-        // const msgs = [{ text: 'Sample', uid: 1 }]
         expect(shouldShowMsgDetails(msgs.slice(0, 1), 0)).to.be.true
     })
 
     it('should throw error if msg index is out of bounds', () => {
-        // let handler = () => { shouldShowMsgDetails(msgs, -1) }
         expect(() => { shouldShowMsgDetails(msgs, -1) }).to.throw(Error)
         expect(() => { shouldShowMsgDetails(msgs, -1) }).to.throw("Index out of bounds")
         expect(() => { shouldShowMsgDetails(msgs, msgs.length) }).to.throw(Error)
