@@ -27,10 +27,9 @@ jobs:
 
       - name: Install all npm modules
         run: npm i
-
-      # Builds the react application
-      - name: Build the React Application
-        run: npm run build
       # Runs unit tests with mocha
       - name: Run unit tests
         run: npm run unit-test
+      # Builds the react application
+      - name: Build the React Application
+        run: npm run build
