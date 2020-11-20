@@ -6,8 +6,7 @@ import dateFormat from 'dateformat';
 import { SendMessage } from './SendMessage';
 import TimeAgo from 'react-timeago';
 import { getChatRoomMessagesQuery } from '../firebase-manager';
-
-
+import { getClassNameForMsgSender, getDateFromTimestamp, isSenderUser, shouldShowMsgDetails } from '../helpers/ChatRoomHelper'
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
@@ -26,13 +25,8 @@ export const ChatRoom = props => {
     return (
         <section className="scrollable vh-80">
             {messages && messages.reverse().map((msg, i) => {
-                let showMsgDetails = true
-                if (i === messages.length - 1) {
-                    showMsgDetails = true
-                }
-                if (i + 1 < messages.length && messages[i + 1].uid === msg.uid) {
-                    showMsgDetails = false
-                }
+                let showMsgDetails = shouldShowMsgDetails(messages, i)
+
                 return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
             }
             )}
@@ -46,20 +40,14 @@ export const ChatRoom = props => {
 function ChatMessage(props) {
     const [user] = useAuthState(firebase.auth())
     const { uid } = user
-    const { text, photoURL, createdAt, displayName } = props.message;
+    const { uid: msgSenderUid, text, photoURL, createdAt, displayName } = props.message;
 
-    const messageSender = uid === props.message.uid ? "sender" : "receiver"
+    const messageSender = getClassNameForMsgSender(isSenderUser(uid, msgSenderUid))
 
     const { showMsgDetails } = props
 
-
-    const msgDate = createdAt
-        ? new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
-        : null;
+    const msgDate = getDateFromTimestamp(createdAt)
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
-
-
-
 
     return (
         <div className={`msg ${messageSender}`}>

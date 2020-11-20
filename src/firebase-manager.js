@@ -4,9 +4,8 @@ import firebase from 'firebase'
  * Get the query for all Chat Rooms
  */
 export const getChatRoomListQuery = () => {
-    const chatRoomsRef = firebase.firestore().collection("chatRooms");
 
-    const query = chatRoomsRef.orderBy('createdAt');
+    const query = collections.CHAT_ROOMS.orderBy('createdAt');
     return query
 }
 
@@ -15,8 +14,17 @@ export const getChatRoomListQuery = () => {
  * @param {*ChatRoomId} chatRoomId 
  */
 export const getChatRoomMessagesQuery = chatRoomId => {
-    const chatMessagesRef = firebase.firestore().collection("chatRooms").doc(chatRoomId).collection("messages");
 
-    const query = chatMessagesRef.orderBy('createdAt', "desc").limit(50);
+    const query = collections.MESSAGES(chatRoomId).orderBy('createdAt', "desc").limit(50);
     return query
+}
+
+const collectionNames = {
+    CHAT_ROOMS: "chatRooms",
+    MESSAGES: "messages",
+}
+
+const collections = {
+    CHAT_ROOMS: firebase.firestore().collection(collectionNames.CHAT_ROOMS),
+    MESSAGES: (chatRoomId) => collections.CHAT_ROOMS.doc(chatRoomId).collection(collectionNames.MESSAGES)
 }
