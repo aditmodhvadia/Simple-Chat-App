@@ -6,7 +6,7 @@ import dateFormat from 'dateformat';
 import { SendMessage } from './SendMessage';
 import TimeAgo from 'react-timeago';
 import { getChatRoomMessagesQuery } from '../firebase-manager';
-import { getClassNameForMsgSender, isSenderUser, shouldShowMsgDetails } from '../helpers/ChatRoomHelper'
+import { getClassNameForMsgSender, getDateFromTimestamp, isSenderUser, shouldShowMsgDetails } from '../helpers/ChatRoomHelper'
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
@@ -46,9 +46,7 @@ function ChatMessage(props) {
 
     const { showMsgDetails } = props
 
-    const msgDate = createdAt
-        ? new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
-        : null;
+    const msgDate = getDateFromTimestamp(createdAt)
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
 
     return (

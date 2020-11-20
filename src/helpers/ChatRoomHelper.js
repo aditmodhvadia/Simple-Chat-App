@@ -17,8 +17,15 @@ const getClassNameForMsgSender = (isSenderUser) => {
     return isSenderUser === true ? "sender" : "receiver"
 }
 
+const getDateFromTimestamp = timestamp => {
+    return timestamp && timestamp.seconds && timestamp.seconds > 0
+        ? new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds && timestamp.nanoseconds > 0 ? timestamp.nanoseconds : 0) / 1000000)
+        : null;
+}
+
 module.exports = {
     shouldShowMsgDetails,
     isSenderUser,
-    getClassNameForMsgSender
+    getClassNameForMsgSender,
+    getDateFromTimestamp
 }
