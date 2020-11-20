@@ -13,7 +13,7 @@ const shouldShowMsgDetails = (msgs, msgIndex) => {
 
 const isSenderUser = (userId, msgSenderId) => { return userId === msgSenderId }
 
-const getClassNameForMsgSender = (isSenderUser) => {
+const getClassNameForMsgSender = isSenderUser => {
     return isSenderUser === true ? "sender" : "receiver"
 }
 
@@ -23,9 +23,14 @@ const getDateFromTimestamp = timestamp => {
         : null;
 }
 
+const getClassNameForChatRoomType = isChatRoomSelected => {
+    return isChatRoomSelected === true ? "chat-room-selected" : "chat-room-not-selected"
+}
+
 module.exports = {
     shouldShowMsgDetails,
     isSenderUser,
     getClassNameForMsgSender,
-    getDateFromTimestamp
+    getDateFromTimestamp,
+    getClassNameForChatRoomType
 }

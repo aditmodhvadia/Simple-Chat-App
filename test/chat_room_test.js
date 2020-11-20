@@ -1,4 +1,5 @@
 const { describe } = require('mocha')
+const { getClassNameForChatRoomType } = require('../src/helpers/ChatRoomHelper')
 
 let expect = require('chai').expect
 
@@ -92,6 +93,23 @@ describe('CHAT ROOM', () => {
             const nanoseconds = 1997 * 60 * 60
             expect(getDateFromTimestamp({ seconds: seconds })).to.be.eql(new Date(seconds * 1000))
             expect(getDateFromTimestamp({ seconds: seconds, nanoseconds: nanoseconds })).to.be.eql(new Date(seconds * 1000 + nanoseconds / 1000000))
+        })
+    })
+
+    describe('Class name for chat room', () => {
+        it('should return chat room selected for true', () => {
+            expect(getClassNameForChatRoomType(true)).to.be.eql("chat-room-selected")
+        })
+
+        it('should return chat room not selected for exery other value', () => {
+            const expectedValue = "chat-room-not-selected"
+            expect(getClassNameForChatRoomType(false)).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType(null)).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType(undefined)).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType(1)).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType(0)).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType("test")).to.be.eql(expectedValue)
+            expect(getClassNameForChatRoomType(100)).to.be.eql(expectedValue)
         })
     })
 })

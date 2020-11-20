@@ -3,7 +3,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Typography } from '@material-ui/core';
 import TimeAgo from 'react-timeago';
 import { getChatRoomListQuery } from '../firebase-manager';
-import { getDateFromTimestamp } from '../helpers/ChatRoomHelper';
+import { getDateFromTimestamp, getClassNameForChatRoomType } from '../helpers/ChatRoomHelper';
 
 export const ChatRoomList = props => {
     const query = getChatRoomListQuery()
@@ -30,7 +30,7 @@ export const ChatRoomList = props => {
 
 const ChatRoomItem = props => {
     const { name, lastMsg, id } = props.chatRoom;
-    const chatRoomType = props.isChatRoomSelected ? "chat-room-selected" : "chat-room-not-selected"
+    const chatRoomType = getClassNameForChatRoomType(props.isChatRoomSelected)
 
     const msgDate = lastMsg && getDateFromTimestamp(lastMsg.createdAt)
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
