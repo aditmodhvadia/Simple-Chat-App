@@ -1,9 +1,11 @@
 import React from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import TimeAgo from 'react-timeago';
 import { getChatRoomListQuery } from '../firebase-manager';
+import IconButton from '@material-ui/core/IconButton';
 import { getDateFromTimestamp, getClassNameForChatRoomType } from '../helpers/ChatRoomHelper';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export const ChatRoomList = props => {
     const query = getChatRoomListQuery()
@@ -14,7 +16,16 @@ export const ChatRoomList = props => {
     return (
         <div className="chat-room-list">
             <Box ml={1}>
-                <Typography variant="h5" component="p" >Channels</Typography>
+                <Grid container direction="row" justify="space-between" alignItems="center">
+                    <Grid item>
+                        <Typography variant="h5" component="p" >Channels </Typography>
+                    </Grid>
+                    <Grid item>
+                        <IconButton color="primary" aria-label="create channel" component="span">
+                            <AddCircleIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
                 <section>
                     {chatRooms && chatRooms.map((chatRoom) => {
                         const isChatRoomSelected = chatRoomId === chatRoom.id
