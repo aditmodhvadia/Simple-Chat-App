@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { isValidString } from './helpers/Util';
 
 /**
  * Get the query for all Chat Rooms
@@ -17,6 +18,18 @@ export const getChatRoomMessagesQuery = chatRoomId => {
 
     const query = collections.MESSAGES(chatRoomId).orderBy('createdAt', "desc").limit(50);
     return query
+}
+
+export const createNewChannel = (channelName, uid) => {
+    if (!isValidString(channelName)) {
+        throw new Error("Invalid channel name.")
+    }
+    return collections.CHAT_ROOMS.add({
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        name: channelName,
+        createdBy: uid
+    })
+
 }
 
 const collectionNames = {
