@@ -28,8 +28,8 @@ jobs:
       - name: Install all npm modules
         run: npm i
       # Runs unit tests with mocha
-      - name: Run unit tests
-        run: npm run unit-test
+      - name: Run tests
+        run: npm test
       # Builds the react application
       - name: Build the React Application
         run: npm run build
