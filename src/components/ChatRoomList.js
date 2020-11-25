@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField, Typography } from '@material-ui/core';
 import TimeAgo from 'react-timeago';
-import { createNewChannel, getChatRoomListQuery } from '../firebase-manager';
+import { createNewChannel } from '../firebase-manager';
 import IconButton from '@material-ui/core/IconButton';
 import { getDateFromTimestamp, getClassNameForChatRoomType } from '../helpers/ChatRoomHelper';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -10,10 +9,7 @@ import { isValidString } from '../helpers/Util';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase/app'
 
-export const ChatRoomList = props => {
-    const query = getChatRoomListQuery()
-    const [chatRooms] = useCollectionData(query, { idField: 'id' });
-    const { chatRoomId } = props
+export const ChatRoomList = ({ selectedChatRoomId, chatRooms, onChatRoomClicked }) => {
 
     const [open, setOpen] = useState(false)
 
@@ -40,8 +36,9 @@ export const ChatRoomList = props => {
                 </Grid>
                 <section>
                     {chatRooms && chatRooms.map((chatRoom) => {
-                        const isChatRoomSelected = chatRoomId === chatRoom.id
-                        return <ChatRoomItem key={chatRoom.id} isChatRoomSelected={isChatRoomSelected} chatRoom={chatRoom} onChatRoomClick={props.onChatRoomClicked} />
+                        const isChatRoomSelected = selectedChatRoomId === chatRoom.id
+
+                        return <ChatRoomItem key={chatRoom.id} isChatRoomSelected={isChatRoomSelected} chatRoom={chatRoom} onChatRoomClick={onChatRoomClicked} />
                     }
                     )}
                 </section>

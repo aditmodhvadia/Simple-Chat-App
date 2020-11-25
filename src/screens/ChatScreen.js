@@ -3,6 +3,8 @@ import 'firebase/firestore';
 import { ChatRoom } from '../components/ChatRoom';
 import { Grid, Hidden } from '@material-ui/core';
 import { ChatRoomList } from '../components/ChatRoomList';
+import { getChatRoomListQuery } from '../firebase-manager';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 
 function ChatScreen() {
@@ -17,6 +19,7 @@ function ChatScreen() {
         }
     }
 
+    const [chatRooms] = useCollectionData(getChatRoomListQuery(), { idField: 'id' });
 
     return (
         <main>
@@ -24,7 +27,7 @@ function ChatScreen() {
                 <Hidden only="xs">
                     <Grid item sm={2}>
                         {/* TODO: Create Channel Button */}
-                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} chatRoomId={selectedChatRoomId} />
+                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} selectedChatRoomId={selectedChatRoomId} chatRooms={chatRooms} />
                     </Grid>
                 </Hidden>
                 <Grid item xs={12} sm={10}>
