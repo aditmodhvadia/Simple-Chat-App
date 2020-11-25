@@ -3,8 +3,8 @@ import 'firebase/firestore';
 import { ChatRoom } from '../components/ChatRoom';
 import { Grid, Hidden } from '@material-ui/core';
 import { ChatRoomList } from '../components/ChatRoomList';
-import { getChatRoomListQuery } from '../firebase-manager';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { getChatRoomListQuery } from '../firebase-manager';
 
 
 function ChatScreen() {
