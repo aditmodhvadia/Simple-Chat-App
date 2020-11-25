@@ -1,17 +1,15 @@
 import React from 'react'
 import firebase from 'firebase/app'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { Box, Button } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-function AppHeader() {
-    const [user] = useAuthState(firebase.auth())
+const AppHeader = ({ isUserSignedIn }) => {
     return (
         <header>
             <Box mr={2} ml={2}>
                 <p className="branding">Simple Chat App</p>
             </Box>
-            {user ? <SignOutButton /> : null}
+            {isUserSignedIn ? <SignOutButton /> : null}
         </header>
     )
 }

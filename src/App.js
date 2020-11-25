@@ -30,7 +30,7 @@ function App() {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <AppHeader />
+          <AppHeader isUserSignedIn={user !== null} />
           <section>
             {user ? <ChatScreen /> : <SignInScreen />}
           </section>
