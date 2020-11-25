@@ -10,9 +10,8 @@ import { getClassNameForMsgSender, getDateFromTimestamp, isSenderUser, shouldSho
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
-    const query = getChatRoomMessagesQuery(chatRoomId)
 
-    const [messages] = useCollectionData(query, { idField: 'id' });
+    const [messages] = useCollectionData(getChatRoomMessagesQuery(chatRoomId), { idField: 'id' });
 
     const scrollTo = useRef()
 
