@@ -4430,10 +4430,10 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dateformat@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.0.0.tgz#e2eaf8eaf384f0dcf834870c1b8c1b1bccca4539"
-  integrity sha512-zpKyDYpeePyYGJp2HhRxLHlA+jZQNjt+MwmcVmLxCIECeC4Ks3TI3yk/CSMKylbnCJ5htonfOugYtRRTpyoHow==
+dateformat@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-4.2.2.tgz#319b64b4298d6bd4f918c41ccf3959bf04eae750"
+  integrity sha512-xuYrpI9DKHMDmbGOuxYnDl2kP+/ADeCjGV55uk8zDpPr19VyTla4QcOVZvI5RqU59376dMe0oqs1HkF9S+tyxw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
