@@ -23,7 +23,7 @@ export const ChatRoom = props => {
 
     return (
         <section className="scrollable vh-80">
-            {messages && messages.reverse().map((msg, i) => {
+            {messages && messages.sort((msg1, msg2) => { return msg1.createdAt - msg2.createdAt }).map((msg, i) => {
                 let showMsgDetails = shouldShowMsgDetails(messages, i)
                 return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
             }
