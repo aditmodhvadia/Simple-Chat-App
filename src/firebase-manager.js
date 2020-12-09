@@ -5,7 +5,6 @@ import { isValidString } from './helpers/Util';
  * Get the query for all Chat Rooms
  */
 export const getChatRoomListQuery = () => {
-
     const query = collections.CHAT_ROOMS.orderBy('createdAt');
     return query
 }
@@ -15,7 +14,6 @@ export const getChatRoomListQuery = () => {
  * @param {*ChatRoomId} chatRoomId 
  */
 export const getChatRoomMessagesQuery = chatRoomId => {
-
     const query = collections.MESSAGES(chatRoomId).orderBy('createdAt', "desc").limit(50);
     return query
 }
@@ -29,7 +27,17 @@ export const createNewChannel = (channelName, uid) => {
         name: channelName,
         createdBy: uid
     })
+}
 
+export const sendNewMessage = (chatRoomId, { msg, uid, photoURL, displayName }) => {
+    const chatMessagesRef = chatRoomId ? firebase.firestore().collection('chatRooms').doc(chatRoomId).collection("messages") : null
+    return chatMessagesRef.add({
+        text: msg.trim(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        uid,
+        photoURL,
+        displayName
+    })
 }
 
 const collectionNames = {

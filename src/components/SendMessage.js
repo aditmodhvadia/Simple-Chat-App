@@ -4,8 +4,9 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { Box, Button, createStyles, makeStyles, TextField } from '@material-ui/core'
+import { Box, Button, Container, createStyles, makeStyles, TextField } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
+import { sendNewMessage } from '../firebase-manager'
 
 
 const useStyles = makeStyles((theme) => createStyles({
@@ -18,9 +19,6 @@ const useStyles = makeStyles((theme) => createStyles({
         borderRadius: "8px",
         // position: "fixed",
     },
-    msgInputBox: {
-        width: "90%",
-    },
     msgInput: {
         background: "#34515e",
         color: "#fff",
@@ -31,25 +29,14 @@ export const SendMessage = props => {
     const { chatRoomId } = props
     const [msg, setMsg] = useState("")
     const [user] = useAuthState(firebase.auth())
-    const chatMessagesRef = chatRoomId ? firebase.firestore().collection('chatRooms').doc(chatRoomId).collection("messages") : null
-
 
     const onSendClicked = async (e) => {
         e.preventDefault()
-
         if (msg === undefined || msg.trim() === "") {
             return;
         }
-        const { uid, photoURL, displayName } = user
-
         try {
-            await chatMessagesRef.add({
-                text: msg.trim(),
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                uid,
-                photoURL,
-                displayName
-            })
+            await sendNewMessage(chatRoomId, { ...user, msg })
             console.log("Msg sent");
         } catch (error) {
             // TODO: Show alert to the user 
