@@ -25,7 +25,6 @@ export const ChatRoom = props => {
         <section className="scrollable vh-80">
             {messages && messages.reverse().map((msg, i) => {
                 let showMsgDetails = shouldShowMsgDetails(messages, i)
-
                 return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
             }
             )}

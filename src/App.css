@@ -108,6 +108,7 @@ body {
   align-items: flex-end;
   font-size: 12px;
   letter-spacing: 0.05rem;
+  margin-top: 8px;
 }
 
 .receiver {
