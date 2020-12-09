@@ -50,9 +50,9 @@ function ChatMessage(props) {
 
     return (
         <div className={`msg ${messageSender}`}>
-            <div className="msg-container">
+            <div className={`msg-container`}>
                 <div className="msg-body"><p>{text}</p></div>
-                <div className={`msg-time-details`}>
+                <div className={`msg-time-details ${messageSender === "receiver" ? "details-left" : null}`}>
                     {showMsgDetails ?
                         <>
                             {displayName}

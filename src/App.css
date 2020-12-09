@@ -115,6 +115,13 @@ body {
   flex-direction: row-reverse;
 }
 
+.details-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+}
+
 .msg-avatar-holder {
   align-self: flex-end;
   margin: 0 8px 28px 8px;
