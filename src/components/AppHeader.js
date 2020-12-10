@@ -1,11 +1,13 @@
 import React from 'react'
 import firebase from 'firebase/app'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, Hidden, IconButton } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const AppHeader = ({ isUserSignedIn }) => {
     return (
         <header>
+            {isUserSignedIn ? <HamburgerMenu /> : null}
             <Box mr={2} ml={2}>
                 <p className="branding">Simple Chat App</p>
             </Box>
@@ -26,4 +28,17 @@ const SignOutButton = () => {
         </Box>
     )
 }
+
+const HamburgerMenu = () => {
+    return (
+        <Hidden smUp>
+            <Box ml={1}>
+                <IconButton aria-label="side menu">
+                    <MenuIcon onClick={() => { }} />
+                </IconButton>
+            </Box>
+        </Hidden>
+    )
+}
+
 export default AppHeader
