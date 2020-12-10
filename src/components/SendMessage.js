@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import { Box, Button, Container, createStyles, makeStyles, TextField } from '@material-ui/core'
+import { Box, Button, createStyles, makeStyles, TextField } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import { sendNewMessage } from '../firebase-manager'
 
