@@ -160,6 +160,7 @@ p.msg-time {
 .chat-room-last-msg {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .chat-room-list {
