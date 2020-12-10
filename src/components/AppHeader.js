@@ -1,17 +1,17 @@
 import React from 'react'
 import firebase from 'firebase/app'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, Hidden, IconButton } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MenuIcon from '@material-ui/icons/Menu';
 
-function AppHeader() {
-    const [user] = useAuthState(firebase.auth())
+const AppHeader = ({ isUserSignedIn }) => {
     return (
         <header>
+            {isUserSignedIn ? <HamburgerMenu /> : null}
             <Box mr={2} ml={2}>
                 <p className="branding">Simple Chat App</p>
             </Box>
-            {user ? <SignOutButton /> : null}
+            {isUserSignedIn ? <SignOutButton /> : null}
         </header>
     )
 }
@@ -28,4 +28,17 @@ const SignOutButton = () => {
         </Box>
     )
 }
+
+const HamburgerMenu = () => {
+    return (
+        <Hidden smUp>
+            <Box ml={1}>
+                <IconButton aria-label="side menu">
+                    <MenuIcon onClick={() => { }} />
+                </IconButton>
+            </Box>
+        </Hidden>
+    )
+}
+
 export default AppHeader

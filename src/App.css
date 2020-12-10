@@ -1,12 +1,13 @@
 .App {
   min-height: 100vh;
   min-width: 100vw;
+  max-width: 100vw;
   background-color: #607d8b;
   color: white;
 }
 
 .send-msg-container {
-  width: 100%;
+  width: 80vw;
   position: fixed;
   bottom: 0;
   max-height: 10vh;
@@ -108,11 +109,19 @@ body {
   align-items: flex-end;
   font-size: 12px;
   letter-spacing: 0.05rem;
+  margin-top: 8px;
 }
 
 .receiver {
   justify-content: flex-end;
   flex-direction: row-reverse;
+}
+
+.details-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
 }
 
 .msg-avatar-holder {
@@ -151,6 +160,7 @@ p.msg-time {
 .chat-room-last-msg {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .chat-room-list {

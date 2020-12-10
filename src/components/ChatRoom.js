@@ -6,14 +6,12 @@ import dateFormat from 'dateformat';
 import { SendMessage } from './SendMessage';
 import TimeAgo from 'react-timeago';
 import { getChatRoomMessagesQuery } from '../firebase-manager';
-
-
+import { getClassNameForMsgSender, getDateFromTimestamp, isSenderUser, shouldShowMsgDetails } from '../helpers/ChatRoomHelper'
 
 export const ChatRoom = props => {
     const { chatRoomId } = props
-    const query = getChatRoomMessagesQuery(chatRoomId)
 
-    const [messages] = useCollectionData(query, { idField: 'id' });
+    const [messages] = useCollectionData(getChatRoomMessagesQuery(chatRoomId), { idField: 'id' });
 
     const scrollTo = useRef()
 
@@ -24,48 +22,37 @@ export const ChatRoom = props => {
 
 
     return (
-        <section className="scrollable vh-80">
-            {messages && messages.reverse().map((msg, i) => {
-                let showMsgDetails = true
-                if (i === messages.length - 1) {
-                    showMsgDetails = true
+        <>
+            <section className="scrollable vh-80">
+                {messages && messages.sort((msg1, msg2) => { return msg1.createdAt - msg2.createdAt }).map((msg, i) => {
+                    let showMsgDetails = shouldShowMsgDetails(messages, i)
+                    return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
                 }
-                if (i + 1 < messages.length && messages[i + 1].uid === msg.uid) {
-                    showMsgDetails = false
-                }
-                return <ChatMessage key={msg.id} message={msg} showMsgDetails={showMsgDetails} />
-            }
-            )}
-            <div ref={scrollTo}></div>
+                )}
+                <div ref={scrollTo}></div>
+            </section>
             <SendMessage chatRoomId={chatRoomId} />
-        </section>
-
+        </>
     )
 }
 
 function ChatMessage(props) {
     const [user] = useAuthState(firebase.auth())
     const { uid } = user
-    const { text, photoURL, createdAt, displayName } = props.message;
+    const { uid: msgSenderUid, text, photoURL, createdAt, displayName } = props.message;
 
-    const messageSender = uid === props.message.uid ? "sender" : "receiver"
+    const messageSender = getClassNameForMsgSender(isSenderUser(uid, msgSenderUid))
 
     const { showMsgDetails } = props
 
-
-    const msgDate = createdAt
-        ? new Date(createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000)
-        : null;
+    const msgDate = getDateFromTimestamp(createdAt)
     const timeAgo = msgDate ? <TimeAgo date={msgDate} /> : null;
-
-
-
 
     return (
         <div className={`msg ${messageSender}`}>
-            <div className="msg-container">
+            <div className={`msg-container`}>
                 <div className="msg-body"><p>{text}</p></div>
-                <div className={`msg-time-details`}>
+                <div className={`msg-time-details ${messageSender === "receiver" ? "details-left" : null}`}>
                     {showMsgDetails ?
                         <>
                             {displayName}

@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import { ChatRoom } from '../components/ChatRoom';
 import { Grid, Hidden } from '@material-ui/core';
 import { ChatRoomList } from '../components/ChatRoomList';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { getChatRoomListQuery } from '../firebase-manager';
 
 
 function ChatScreen() {
-    let storedChatRoomId = localStorage.getItem("lastChatRoomId")
-    if (!storedChatRoomId) {
-        storedChatRoomId = ""
-    }
+    let storedChatRoomId = localStorage.getItem("lastChatRoomId") ? localStorage.getItem("lastChatRoomId") : ""
+
     const [selectedChatRoomId, setSelectedChatRoomId] = useState(storedChatRoomId)
 
     const onChatRoomClicked = clickedChatRoomId => {
@@ -19,6 +19,7 @@ function ChatScreen() {
         }
     }
 
+    const [chatRooms] = useCollectionData(getChatRoomListQuery(), { idField: 'id' });
 
     return (
         <main>
@@ -26,7 +27,7 @@ function ChatScreen() {
                 <Hidden only="xs">
                     <Grid item sm={2}>
                         {/* TODO: Create Channel Button */}
-                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} chatRoomId={selectedChatRoomId} />
+                        <ChatRoomList onChatRoomClicked={onChatRoomClicked} selectedChatRoomId={selectedChatRoomId} chatRooms={chatRooms} />
                     </Grid>
                 </Hidden>
                 <Grid item xs={12} sm={10}>
